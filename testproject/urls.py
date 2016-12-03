@@ -16,10 +16,10 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 from testapp1.views import get_name, get_data
-import testproject.polls
+#import testproject.polls
 
 urlpatterns = [
-    url(r'^polls/', include('polls.urls')),
+#     url(r'^polls/', include('polls.urls')),
     url(r'^admin/', admin.site.urls),
     url(r'^your-name', get_name),
     url(r'^get_data', get_data),
