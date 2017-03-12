@@ -1,7 +1,6 @@
 import logging
 from django.shortcuts import render
 from django.http import HttpResponse
-#from common.shortcuts import render_to_response
 from django.template import RequestContext
 from django.template import loader
 import requests
@@ -12,7 +11,6 @@ from django_redis import get_redis_connection
 import json
 app_logger = logging.getLogger('app')
 app_stats_logger = logging.getLogger('app_stats')
-#from settings import API_DOMAIN, API_PWD, API_USER
 from .forms import NameForm
 # con = get_redis_connection("default")
 API_URLS = {
@@ -30,12 +28,15 @@ def get_name(request):
         form = NameForm()
     return render(request, 'name.html', {'form': form})
 
+# this function is used to call API's
 def api_call_method(url_path, method='GET'):
     if method == 'GET':
         return requests.get(API_URLS.get(url_path), auth=HTTPBasicAuth(API_USER, API_PWD))
     else:
         pass
 
+
+# this function is used to get the data from the API
 def get_data(request):
     #import pdb;pdb.set_trace()
     cache_key = 'get_city_list'
@@ -56,4 +57,3 @@ def get_data(request):
     data = {x:data.get(x) for x in data if data.get(x).get('country_code', '')=='IN'}
     context = {'city_data': data}
     return HttpResponse(template.render(context,request))
-    #return HttpResponse(json.dumps(obj.json()))
