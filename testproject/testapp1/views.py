@@ -1,7 +1,6 @@
 import logging
 from django.shortcuts import render
 from django.http import HttpResponse
-#from common.shortcuts import render_to_response
 from django.template import RequestContext
 from django.template import loader
 import requests
@@ -35,7 +34,7 @@ def api_call_method(url_path, method='GET'):
         return requests.get(API_URLS.get(url_path), auth=HTTPBasicAuth(API_USER, API_PWD))
     else:
         pass
-
+# get_data function is used to get the json data from the API
 def get_data(request):
     #import pdb;pdb.set_trace()
     cache_key = 'get_city_list'
